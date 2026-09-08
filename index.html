@@ -439,8 +439,13 @@
                         <p class="product-spec">Thiết kế thủ công · Có thể trao đổi màu theo yêu cầu</p>
                         <div class="product-footer">
                             <strong>450.000đ</strong>
-                            <button class="detail-button" data-product="4">Xem chi tiết</button>
-                            <button class="cart-add-button" data-cart-product="4">Thêm vào giỏ</button>
+                            <div class="product-actions">
+                                <button class="detail-button" data-product="4">Chi tiết</button>
+                                <button class="cart-add-button" data-cart-product="4">
+                                    <span class="cart-add-icon">＋</span>
+                                    <span>Thêm vào giỏ</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -457,8 +462,13 @@
                         <p class="product-spec">Thiết kế thủ công · Có thể trao đổi màu theo yêu cầu</p>
                         <div class="product-footer">
                             <strong>450.000đ</strong>
-                            <button class="detail-button" data-product="5">Xem chi tiết</button>
-                            <button class="cart-add-button" data-cart-product="5">Thêm vào giỏ</button>
+                            <div class="product-actions">
+                                <button class="detail-button" data-product="5">Chi tiết</button>
+                                <button class="cart-add-button" data-cart-product="5">
+                                    <span class="cart-add-icon">＋</span>
+                                    <span>Thêm vào giỏ</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -475,8 +485,13 @@
                         <p class="product-spec">Thiết kế thủ công · Có thể trao đổi màu theo yêu cầu</p>
                         <div class="product-footer">
                             <strong>450.000đ</strong>
-                            <button class="detail-button" data-product="6">Xem chi tiết</button>
-                            <button class="cart-add-button" data-cart-product="6">Thêm vào giỏ</button>
+                            <div class="product-actions">
+                                <button class="detail-button" data-product="6">Chi tiết</button>
+                                <button class="cart-add-button" data-cart-product="6">
+                                    <span class="cart-add-icon">＋</span>
+                                    <span>Thêm vào giỏ</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -493,8 +508,13 @@
                         <p class="product-spec">Thiết kế thủ công · Có thể trao đổi màu theo yêu cầu</p>
                         <div class="product-footer">
                             <strong>450.000đ</strong>
-                            <button class="detail-button" data-product="7">Xem chi tiết</button>
-                            <button class="cart-add-button" data-cart-product="7">Thêm vào giỏ</button>
+                            <div class="product-actions">
+                                <button class="detail-button" data-product="7">Chi tiết</button>
+                                <button class="cart-add-button" data-cart-product="7">
+                                    <span class="cart-add-icon">＋</span>
+                                    <span>Thêm vào giỏ</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -511,8 +531,13 @@
                         <p class="product-spec">Thiết kế thủ công · Có thể trao đổi màu theo yêu cầu</p>
                         <div class="product-footer">
                             <strong>450.000đ</strong>
-                            <button class="detail-button" data-product="8">Xem chi tiết</button>
-                            <button class="cart-add-button" data-cart-product="8">Thêm vào giỏ</button>
+                            <div class="product-actions">
+                                <button class="detail-button" data-product="8">Chi tiết</button>
+                                <button class="cart-add-button" data-cart-product="8">
+                                    <span class="cart-add-icon">＋</span>
+                                    <span>Thêm vào giỏ</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </article>
@@ -878,7 +903,9 @@
 
     <!-- SHOPPING CART -->
     <button class="cart-button" id="cartButton" type="button" aria-label="Mở giỏ hàng">
-        🛒 <span id="cartCount">0</span>
+        <span class="cart-icon" aria-hidden="true">🛍</span>
+        <span class="cart-label">Giỏ hàng</span>
+        <span class="cart-count" id="cartCount">0</span>
     </button>
 
     <div class="cart-overlay" id="cartOverlay"></div>
@@ -886,14 +913,18 @@
     <aside class="cart-drawer" id="cartDrawer">
         <div class="cart-header">
             <div>
-                <p class="small-title">GIỎ HÀNG</p>
-                <h2>Sản phẩm đã chọn</h2>
+                <p class="small-title">LAM HANDMADE</p>
+                <h2>Giỏ hàng của bạn</h2>
             </div>
             <button class="cart-close" id="cartClose" type="button">×</button>
         </div>
 
         <div class="cart-items" id="cartItems"></div>
-        <div class="cart-empty" id="cartEmpty">Giỏ hàng của bạn đang trống.</div>
+        <div class="cart-empty" id="cartEmpty">
+            <div class="cart-empty-icon">🛍</div>
+            <h3>Giỏ hàng đang trống</h3>
+            <p>Chọn một mẫu bạn thích rồi thêm vào giỏ nhé.</p>
+        </div>
 
         <div class="cart-summary">
             <div class="cart-total-row">
@@ -901,8 +932,11 @@
                 <strong id="cartTotal">0đ</strong>
             </div>
             <p class="cart-note">Phí vận chuyển sẽ được trao đổi khi xác nhận đơn.</p>
-            <button class="cart-checkout" id="cartCheckout" type="button">Đặt hàng qua WhatsApp</button>
-            <button class="cart-clear" id="cartClear" type="button">Xóa giỏ hàng</button>
+            <button class="cart-checkout" id="cartCheckout" type="button">
+                <span>Đặt hàng qua WhatsApp</span>
+                <span>→</span>
+            </button>
+            <button class="cart-clear" id="cartClear" type="button">Xóa toàn bộ giỏ</button>
         </div>
     </aside>
 
