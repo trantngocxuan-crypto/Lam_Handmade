@@ -1672,3 +1672,54 @@ footer p {
         margin-top: auto;
     }
 }
+
+
+/* ===== THÔNG BÁO SẢN PHẨM MỚI ===== */
+.stock-announcement {
+    width: 100%;
+    padding: 11px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #efe3d6;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    text-align: center;
+}
+
+.stock-announcement p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.stock-announcement strong {
+    color: var(--dark);
+    font-weight: 700;
+}
+
+.stock-announcement-dot {
+    width: 8px;
+    height: 8px;
+    flex: 0 0 8px;
+    border-radius: 50%;
+    background: var(--brown-light);
+    box-shadow: 0 0 0 5px rgba(155, 118, 94, 0.12);
+}
+
+@media (max-width: 650px) {
+    .stock-announcement {
+        padding: 10px 5%;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .stock-announcement p {
+        font-size: 12px;
+    }
+
+    .stock-announcement-dot {
+        margin-top: 5px;
+    }
+}

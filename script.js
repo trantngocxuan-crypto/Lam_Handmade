@@ -114,7 +114,7 @@ const products = {
 
     4: {
         name: "Vòng cổ Macramé Xanh Ngọc",
-        price: "Liên hệ",
+        price: "450.000đ",
         material: "Macramé thủ công",
         color: "Xanh ngọc",
         time: "Theo đơn",
@@ -128,7 +128,7 @@ const products = {
 
     5: {
         name: "Vòng cổ Macramé Xám",
-        price: "Liên hệ",
+        price: "450.000đ",
         material: "Macramé thủ công",
         color: "Xám",
         time: "Theo đơn",
@@ -142,7 +142,7 @@ const products = {
 
     6: {
         name: "Vòng cổ Macramé Xanh Lá",
-        price: "Liên hệ",
+        price: "450.000đ",
         material: "Macramé thủ công",
         color: "Xanh lá",
         time: "Theo đơn",
@@ -156,7 +156,7 @@ const products = {
 
     7: {
         name: "Vòng cổ Macramé Xanh Dương",
-        price: "Liên hệ",
+        price: "450.000đ",
         material: "Macramé thủ công",
         color: "Xanh dương",
         time: "Theo đơn",
@@ -170,7 +170,7 @@ const products = {
 
     8: {
         name: "Vòng cổ Macramé Đen",
-        price: "Liên hệ",
+        price: "450.000đ",
         material: "Macramé thủ công",
         color: "Đen",
         time: "Theo đơn",
@@ -323,9 +323,11 @@ function showProduct(productId) {
 
 
     const message =
-        product.price === "Liên hệ"
-            ? "Chào, tôi muốn hỏi thêm về " + product.name + "."
-            : "Chào, tôi muốn hỏi về " + product.name + " giá " + product.price + ".";
+        "Chào, tôi muốn hỏi về " +
+        product.name +
+        " giá " +
+        product.price +
+        ".";
 
 
     whatsappOrder.href =
