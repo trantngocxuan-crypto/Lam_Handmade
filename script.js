@@ -110,6 +110,75 @@ const products = {
             "images/gray-bag-model.jpg"
         ]
 
+    },
+
+    4: {
+        name: "Vòng cổ Macramé Xanh Ngọc",
+        price: "Liên hệ",
+        material: "Macramé thủ công",
+        color: "Xanh ngọc",
+        time: "Theo đơn",
+        description:
+            "Vòng cổ Macramé tông xanh ngọc với điểm nhấn hồng, phù hợp phong cách tự nhiên, boho và nhẹ nhàng.",
+        images: [
+            "images/necklace-teal.jpg",
+            "images/necklace-teal-model.jpg"
+        ]
+    },
+
+    5: {
+        name: "Vòng cổ Macramé Xám",
+        price: "Liên hệ",
+        material: "Macramé thủ công",
+        color: "Xám",
+        time: "Theo đơn",
+        description:
+            "Vòng cổ Macramé tông xám với điểm nhấn hồng, thiết kế gọn và dễ phối cùng nhiều phong cách.",
+        images: [
+            "images/necklace-gray.jpg",
+            "images/necklace-gray-model.jpg"
+        ]
+    },
+
+    6: {
+        name: "Vòng cổ Macramé Xanh Lá",
+        price: "Liên hệ",
+        material: "Macramé thủ công",
+        color: "Xanh lá",
+        time: "Theo đơn",
+        description:
+            "Vòng cổ Macramé xanh lá mang cảm hứng thiên nhiên, được thắt thủ công với phần trung tâm nổi bật.",
+        images: [
+            "images/necklace-green.jpg",
+            "images/necklace-green-model.jpg"
+        ]
+    },
+
+    7: {
+        name: "Vòng cổ Macramé Xanh Dương",
+        price: "Liên hệ",
+        material: "Macramé thủ công",
+        color: "Xanh dương",
+        time: "Theo đơn",
+        description:
+            "Vòng cổ Macramé xanh dương với thiết kế thanh mảnh, tạo điểm nhấn rõ nhưng vẫn nhẹ nhàng khi đeo.",
+        images: [
+            "images/necklace-blue.jpg",
+            "images/necklace-blue-model.jpg"
+        ]
+    },
+
+    8: {
+        name: "Vòng cổ Macramé Đen",
+        price: "Liên hệ",
+        material: "Macramé thủ công",
+        color: "Đen",
+        time: "Theo đơn",
+        description:
+            "Vòng cổ Macramé tông đen với điểm nhấn xanh, phù hợp phong cách cá tính và tối giản.",
+        images: [
+            "images/necklace-black.jpg"
+        ]
     }
 
 };
@@ -254,11 +323,9 @@ function showProduct(productId) {
 
 
     const message =
-        "Chào, tôi muốn hỏi về " +
-        product.name +
-        " giá " +
-        product.price +
-        ".";
+        product.price === "Liên hệ"
+            ? "Chào, tôi muốn hỏi thêm về " + product.name + "."
+            : "Chào, tôi muốn hỏi về " + product.name + " giá " + product.price + ".";
 
 
     whatsappOrder.href =

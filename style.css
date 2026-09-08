@@ -1642,3 +1642,33 @@ footer p {
     }
 
 }
+
+/* ===== NÂNG CẤP SẢN PHẨM PHỤ KIỆN ===== */
+.product-card .product-image img {
+    cursor: pointer;
+}
+
+.product-card .product-footer strong {
+    white-space: nowrap;
+}
+
+@media (min-width: 1001px) {
+    .product-grid {
+        align-items: stretch;
+    }
+
+    .product-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-content {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
+
+    .product-footer {
+        margin-top: auto;
+    }
+}
