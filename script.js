@@ -220,6 +220,7 @@ const whatsappOrder =
 function showProduct(productId) {
 
     const product = products[productId];
+    activeModalProductId = String(productId);
 
 
     if (!product) {
@@ -406,6 +407,175 @@ document.addEventListener("keydown", function (event) {
     }
 
 });
+
+
+
+// =========================
+// SHOPPING CART
+// =========================
+const CART_KEY = "lam-handmade-cart-v1";
+let cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+let activeModalProductId = null;
+
+const cartButton = document.getElementById("cartButton");
+const cartCount = document.getElementById("cartCount");
+const cartDrawer = document.getElementById("cartDrawer");
+const cartOverlay = document.getElementById("cartOverlay");
+const cartClose = document.getElementById("cartClose");
+const cartItems = document.getElementById("cartItems");
+const cartEmpty = document.getElementById("cartEmpty");
+const cartTotal = document.getElementById("cartTotal");
+const cartCheckout = document.getElementById("cartCheckout");
+const cartClear = document.getElementById("cartClear");
+const modalAddToCart = document.getElementById("modalAddToCart");
+
+function getProduct(id) { return products[id] || products[Number(id)]; }
+function parsePrice(text) { return Number(String(text).replace(/\D/g,"") || 0); }
+function formatPrice(n) { return new Intl.NumberFormat("vi-VN").format(n) + "đ"; }
+
+function saveCart() {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
+function renderCart() {
+    cartCount.textContent = cart.reduce((sum,item) => sum + item.qty, 0);
+    cartItems.innerHTML = "";
+    cartEmpty.style.display = cart.length ? "none" : "block";
+
+    let total = 0;
+
+    cart.forEach(item => {
+        const product = getProduct(item.id);
+        if (!product) return;
+
+        const unit = parsePrice(product.price);
+        total += unit * item.qty;
+
+        const row = document.createElement("div");
+        row.className = "cart-item";
+        row.innerHTML = `
+            <img src="${product.images[0]}" alt="${product.name}">
+            <div class="cart-item-info">
+                <h3>${product.name}</h3>
+                <div class="cart-item-price">${product.price}</div>
+                <div class="cart-item-bottom">
+                    <div class="cart-qty">
+                        <button data-cart-minus="${item.id}" type="button">−</button>
+                        <span>${item.qty}</span>
+                        <button data-cart-plus="${item.id}" type="button">+</button>
+                    </div>
+                    <button class="cart-remove" data-cart-remove="${item.id}" type="button">Xóa</button>
+                </div>
+            </div>`;
+        cartItems.appendChild(row);
+    });
+
+    cartTotal.textContent = formatPrice(total);
+    saveCart();
+}
+
+function toast(message) {
+    let el = document.querySelector(".cart-toast");
+    if (!el) {
+        el = document.createElement("div");
+        el.className = "cart-toast";
+        document.body.appendChild(el);
+    }
+    el.textContent = message;
+    el.classList.add("show");
+    clearTimeout(toast.timer);
+    toast.timer = setTimeout(() => el.classList.remove("show"), 1800);
+}
+
+function addToCart(id) {
+    id = String(id);
+    const product = getProduct(id);
+    if (!product) return;
+
+    const existing = cart.find(item => String(item.id) === id);
+    if (existing) existing.qty += 1;
+    else cart.push({id, qty:1});
+
+    renderCart();
+    toast("Đã thêm vào giỏ: " + product.name);
+}
+
+function changeQty(id, change) {
+    id = String(id);
+    const item = cart.find(item => String(item.id) === id);
+    if (!item) return;
+    item.qty += change;
+    if (item.qty <= 0) cart = cart.filter(item => String(item.id) !== id);
+    renderCart();
+}
+
+function removeItem(id) {
+    cart = cart.filter(item => String(item.id) !== String(id));
+    renderCart();
+}
+
+function openCart() {
+    cartDrawer.classList.add("open");
+    cartOverlay.classList.add("open");
+    document.body.style.overflow = "hidden";
+}
+
+function closeCart() {
+    cartDrawer.classList.remove("open");
+    cartOverlay.classList.remove("open");
+    if (!modal.classList.contains("open")) document.body.style.overflow = "";
+}
+
+document.querySelectorAll("[data-cart-product]").forEach(button => {
+    button.addEventListener("click", () => addToCart(button.dataset.cartProduct));
+});
+
+cartButton.addEventListener("click", openCart);
+cartClose.addEventListener("click", closeCart);
+cartOverlay.addEventListener("click", closeCart);
+
+cartItems.addEventListener("click", event => {
+    const minus = event.target.closest("[data-cart-minus]");
+    const plus = event.target.closest("[data-cart-plus]");
+    const remove = event.target.closest("[data-cart-remove]");
+    if (minus) changeQty(minus.dataset.cartMinus, -1);
+    if (plus) changeQty(plus.dataset.cartPlus, 1);
+    if (remove) removeItem(remove.dataset.cartRemove);
+});
+
+cartClear.addEventListener("click", () => {
+    cart = [];
+    renderCart();
+});
+
+modalAddToCart.addEventListener("click", () => {
+    if (activeModalProductId !== null) addToCart(activeModalProductId);
+});
+
+cartCheckout.addEventListener("click", () => {
+    if (!cart.length) {
+        toast("Giỏ hàng đang trống.");
+        return;
+    }
+
+    let total = 0;
+    const lines = cart.map((item,index) => {
+        const product = getProduct(item.id);
+        const unit = parsePrice(product.price);
+        total += unit * item.qty;
+        return `${index+1}. ${product.name} x${item.qty} - ${formatPrice(unit*item.qty)}`;
+    });
+
+    const message =
+        "Chào Lam Handmade, tôi muốn đặt các sản phẩm sau:\n\n" +
+        lines.join("\n") +
+        "\n\nTổng tạm tính: " + formatPrice(total) +
+        "\n\nNhờ shop tư vấn giúp tôi về màu sắc và phí vận chuyển.";
+
+    window.open("https://wa.me/84869906206?text=" + encodeURIComponent(message), "_blank");
+});
+
+renderCart();
 
 
 // =========================
